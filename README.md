@@ -22,5 +22,5 @@ source activate environment
 
 configurate credentials
 1. copy and rename the file dotcredentials.yaml `cp dotcredentials.yaml .credentials.yaml`
-1. open the file dotcredentials.yaml
-1. replace user and password for each  site
+2. open the file .credentials.yaml
+3. replace users and passwords by valid ones for each site
