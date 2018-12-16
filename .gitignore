@@ -1,2 +1,4 @@
 .credentials.yaml
+chromedriver
 env/
+.ipynb_checkpoints/

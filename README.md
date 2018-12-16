@@ -8,7 +8,7 @@ supported Platforms:
 
 ## Installation
 
-create virtual environment
+### Create virtual environment
 using Anaconda
 ~~~
 conda create --name invdash python=3.6
@@ -19,8 +19,14 @@ or using virtualenv
 virtualenv -p /usr/bin/python3.6 environment
 source activate environment
 ~~~
+### Download selenium driver
+~~~
+wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
+unzip chromedriver_linux64.zip
+rm chromedriver_linux64.zip
+~~~
 
-configurate credentials
+### Configurate credentials
 1. copy and rename the file dotcredentials.yaml `cp dotcredentials.yaml .credentials.yaml`
 2. open the file .credentials.yaml
 3. replace users and passwords by valid ones for each site

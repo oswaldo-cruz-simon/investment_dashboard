@@ -2,10 +2,18 @@ investment_sites:
   briq:
     url: https://www.briq.mx
     home: /proyectos
+    projects:
+      filter:
+        tag:
+          img: src
+          regex: abel_buscando-inversion
+      map:
+        parent: href
   cumplo:
     url: https://www.cumplo.mx
     home: /
   m2crowd:
     url: https://www.m2crowd.com
     home: /offerings/browse
-  
+driver:
+  path: ./chromedriver

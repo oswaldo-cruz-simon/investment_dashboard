@@ -1,0 +1,4 @@
+jupyter==1.0.0
+selenium==3.141.0
+PyYAML==3.13
+beautifulsoup4==4.6.3
