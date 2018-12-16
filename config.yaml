@@ -2,6 +2,11 @@ investment_sites:
   briq:
     url: https://www.briq.mx
     home: /proyectos
+    login:
+      url: /users/sign_in
+      user: //*[@id="user_email"]
+      password: //*[@id="user_password"]
+      button: //*[@id="new_user"]/div[4]/div/input
     projects:
       filter:
         tag:
