@@ -17,6 +17,12 @@ investment_sites:
   cumplo:
     url: https://www.cumplo.mx
     home: /
+    login:
+      auth0: /html/body/main/div[1]/div/div/p/button
+      url: /login
+      user: /html/body/div/div/div[2]/form/div/div/div[3]/span/div/div/div/div/div/div/div/div/div[4]/div[1]/div/input
+      password: /html/body/div/div/div[2]/form/div/div/div[3]/span/div/div/div/div/div/div/div/div/div[4]/div[2]/div/div/input
+      button: /html/body/div/div/div[2]/form/div/div/button
   m2crowd:
     url: https://www.m2crowd.com
     home: /offerings/browse
