@@ -17,7 +17,7 @@ investment_sites:
         parent: href
     project:
       name: //*[@id="developers-layout"]/div[3]/div/div/div[2]/h2
-      location: //*[@id="developers-layout"]/div[3]/div/div/div[2]/p[2]/text()
+      location: //*[@id="developers-layout"]/div[3]/div/div/div[2]/p[2]
       owners:
         type: //*[@id="developers-layout"]/div[4]/div/div/div[2]/div[9]/div[2]/table/tbody/tr[1]/td[1]
         name: //*[@id="developers-layout"]/div[4]/div/div/div[2]/div[9]/div[2]/table/tbody/tr[1]/td[2] 
