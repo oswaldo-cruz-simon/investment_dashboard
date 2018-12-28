@@ -20,7 +20,7 @@ investment_sites:
       location: //*[@id="developers-layout"]/div[3]/div/div/div[2]/p[2]
       owners:
         type: //*[@id="developers-layout"]/div[4]/div/div/div[2]/div[9]/div[2]/table/tbody/tr[1]/td[1]
-        name: //*[@id="developers-layout"]/div[4]/div/div/div[2]/div[9]/div[2]/table/tbody/tr[1]/td[2] 
+        name: //*[@id="developers-layout"]/div[4]/div/div/div[2]/div[9]/div[2]/table/tbody/tr[1]/td[2]
       annual_rate: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[1]/div[1]/p[2]/strong
       minimum_invest: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[2]/table/tbody/tr[3]/td
       commission: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[2]/table/tbody/tr[5]/td
@@ -43,8 +43,24 @@ investment_sites:
       user: //*[@id="auth0-lock-container-1"]/div/div[2]/form/div/div/div[3]/span/div/div/div/div/div/div/div/div/div[4]/div[1]/div/input
       password: //*[@id="auth0-lock-container-1"]/div/div[2]/form/div/div/div[3]/span/div/div/div/div/div/div/div/div/div[4]/div[2]/div/div/input
       button: /html/body/div/div/div[2]/form/div/div/button
+      until: /html/body/main/header/div[2]/div[2]/div/nav/ul/li[5]/a/span
+    project:
+      name: //*[@id="app"]/div/main/div/div[2]/div/div/div[1]/div[2]/h1
+      type: //*[@id="app"]/div/main/div/div[2]/div/div/div[2]/div/p[2]/strong
+      annual_rate: //*[@id="app"]/div/main/div/div[2]/div/div/div[2]/div/p[4]
+      minimum_invest: //*[@id="app"]/div/main/div/div[2]/div/div/div[3]/div/div/div/div[2]/div[2]/div[1]/div[2]/span
+      commission: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[2]/table/tbody/tr[5]/td
+      time:
+        remain: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/p/strong
+        min: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[1]/div[2]/p[2]/strong[1]
+        max: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[1]/div[2]/p[2]/strong[2]
+      capital:
+        target: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/small/span[3]
+        current: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/small/span[1]
+        porcentege: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[2]/div/div
   m2crowd:
     url: https://www.m2crowd.com
     home: /offerings/browse
 driver:
   path: ./chromedriver
+  implicitly_wait: 20
