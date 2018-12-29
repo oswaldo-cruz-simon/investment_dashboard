@@ -1,5 +1,5 @@
 import collections
-
+import re
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
@@ -13,6 +13,18 @@ def map_nested_dicts(ob, func):
         return {k: map_nested_dicts(v, func) for k, v in ob.items()}
     else:
         return func(ob)
+
+
+def extract_number(type_, text):
+    regex = {
+        "quantity": r'\$(?:\d+,?)+(?:\.\d+)?',
+        "percentage": r'(?:\d+)+(?:\.\d+)?%'
+    }
+    num = re.findall(regex[type_], text)[0]
+    num = num.replace('$', '')
+    num = num.replace(',', '')
+    num = num.replace('%', '')
+    return float(num)
 
 
 class ProjectPage(object):

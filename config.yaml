@@ -32,7 +32,7 @@ investment_sites:
         capital:
           target: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/small/span[3]
           current: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/small/span[1]
-          porcentege: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[2]/div/div
+          percentage: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[2]/div/div
   cumplo:
     url: https://www.cumplo.mx
     current_projetcs:
@@ -51,7 +51,7 @@ investment_sites:
         type: //*[@id="app"]/div/main/div/div[2]/div/div/div[2]/div/p[2]/strong
         annual_rate: //*[@id="app"]/div/main/div/div[2]/div/div/div[2]/div/p[4]
         minimum_invest: //*[@id="app"]/div/main/div/div[2]/div/div/div[3]/div/div/div/div[3]/div[1]/div[1]/span[2]
-        commission: //*[@id="app"]/div/main/div[2]/div/div[2]/div/div/div/div[2]/div/ul[1]/li[1]
+        commission: //*[@id="app"]/div/main/div[2]/div/div[2]/div/div/div/div[2]/div/ul[1]/li[2]
         time:
           remain: //*[@id="app"]/div/main/div/div[2]/div/div/div[1]/div[3]/div[1]/p[2]/span
           min: //*[@id="app"]/div/main/div/div[2]/div/div/div[2]/div/p[3]
@@ -59,7 +59,7 @@ investment_sites:
         capital:
           target: //*[@id="app"]/div/main/div/div[2]/div/div/div[1]/div[3]/p[1]
           remain: //*[@id="app"]/div/main/div/div[2]/div/div/div[3]/div/div/div/div[2]/div/span[2]
-          porcentege: //*[@id="app"]/div/main/div/div[2]/div/div/div[1]/div[3]/div[1]/p[1]
+          percentage: //*[@id="app"]/div/main/div/div[2]/div/div/div[1]/div[3]/div[1]/p[1]
         simulator:
           installment: //*[@id="app"]/div/main/div[2]/div/div[2]/div/div/div/div[2]/div/ul[2]/li[3]
           net_installment: //*[@id="app"]/div/main/div[2]/div/div[2]/div/div/div/div[2]/div/ul[2]/li[4]
