@@ -1,13 +1,17 @@
 import collections
 import re
+import logging
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
 from extract.common import config
 from extract.common import browser
 
-from selenium.common.exceptions import NoSuchElementException
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def map_nested_dicts(ob, func):
@@ -18,6 +22,11 @@ def map_nested_dicts(ob, func):
 
 
 def extract_number(type_, text):
+    if not isinstance(text, str):
+        logging.error(
+            'param is not a text, type: {}, value: {}'.format(
+                type(text), text))
+        return text
     regex = {
         "quantity": r'\$(?:\d+,?)+(?:\.\d+)?',
         "percentage": r'(?:\d+)+(?:\.\d+)?%'
@@ -59,6 +68,7 @@ class ProjectPage(object):
             try:
                 return self._browser.find_element_by_xpath(xpath).text
             except NoSuchElementException:
+                logging.warning('xpath: {} not found'.format(xpath))
                 return None
         payload_ = map_nested_dicts(
             self._config['project']['payload'], get_text
