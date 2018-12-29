@@ -48,10 +48,10 @@ class LogInPage(object):
         self.type_password_credential()
         self.click_login()
         self._browser.implicitly_wait(10)
-        print(self._config['login']['until'], self._credentials['user'])
-        WebDriverWait(self._browser, 10).until(
-            EC.text_to_be_present_in_element(
-                (By.XPATH, self._config['login']['until']),
-                self._credentials['user']
+        if 'login' in self._config['login']:
+            WebDriverWait(self._browser, 10).until(
+                EC.text_to_be_present_in_element(
+                    (By.XPATH, self._config['login']['until']),
+                    self._credentials['user']
+                )
             )
-        )
