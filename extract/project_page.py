@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 from extract.common import config
 from extract.common import browser
 
+from selenium.common.exceptions import NoSuchElementException
+
 
 def map_nested_dicts(ob, func):
     if isinstance(ob, collections.Mapping):
@@ -35,6 +37,14 @@ class ProjectPage(object):
         self._soup = None
         self._home = "{}{}".format(self._config['url'], home)
 
+    @property
+    def home(self):
+        return self._home
+
+    @home.setter
+    def home(self, home):
+        self._home = "{}{}".format(self._config['url'], home)
+
     def navigate(self):
         self._browser.get(self._home)
         self._browser.implicitly_wait(
@@ -45,10 +55,13 @@ class ProjectPage(object):
 
     @property
     def payload(self):
-
+        def get_text(xpath):
+            try:
+                return self._browser.find_element_by_xpath(xpath).text
+            except NoSuchElementException:
+                return None
         payload_ = map_nested_dicts(
-            self._config['project']['payload'],
-            lambda v: self._browser.find_element_by_xpath(v).text
+            self._config['project']['payload'], get_text
         )
         self._clean_payload(payload_)
         return payload_

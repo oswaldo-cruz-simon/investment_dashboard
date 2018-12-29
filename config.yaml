@@ -22,10 +22,12 @@ investment_sites:
         annual_rate: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[1]/div[1]/p[2]/strong
         minimum_invest: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[2]/table/tbody/tr[3]/td
         commission: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[2]/table/tbody/tr[5]/td
+        type: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[2]/table/tbody/tr[1]/td
         time:
           remain: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/p/strong
           min: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[1]/div[2]/p[2]/strong[1]
           max: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[1]/div[2]/p[2]/strong[2]
+          estimated: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/div[1]/div[2]
         capital:
           target: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/small/span[3]
           current: //*[@id="developers-layout"]/div[4]/div/div/div[1]/div[1]/div/div[1]/small/span[1]
