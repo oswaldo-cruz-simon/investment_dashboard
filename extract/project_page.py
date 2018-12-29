@@ -40,18 +40,43 @@ class ProjectPage(object):
         self._browser.implicitly_wait(
             int(config()['driver']['implicitly_wait']))
 
+    def _clean_payload(self, payload_):
+        pass
+
     @property
     def payload(self):
-        return map_nested_dicts(
+
+        payload_ = map_nested_dicts(
             self._config['project']['payload'],
             lambda v: self._browser.find_element_by_xpath(v).text
         )
+        self._clean_payload(payload_)
+        return payload_
 
 
 class CumploProjectPage(ProjectPage):
 
     def __init__(self, home):
         ProjectPage.__init__(self, 'cumplo', home)
+
+    def _clean_payload(self, payload_):
+        payload_['commission'] = extract_number(
+            "quantity", payload_['commission'])
+        payload_['minimum_invest'] = extract_number(
+            "quantity", payload_['minimum_invest'])
+        payload_['capital']['remain'] = extract_number(
+            "quantity", payload_['capital']['remain'])
+        payload_['capital']['target'] = extract_number(
+            "quantity", payload_['capital']['target'])
+        payload_['simulator']['net_installment'] = extract_number(
+            "quantity", payload_['simulator']['net_installment'])
+        payload_['simulator']['installment'] = extract_number(
+            "quantity", payload_['simulator']['installment'])
+
+        payload_['annual_rate'] = extract_number(
+            'percentage', payload_['annual_rate'])
+        payload_['capital']['percentage'] = extract_number(
+            "percentage", payload_['capital']['percentage'])
 
     def simulator(self):
         self._browser.find_element_by_xpath(
@@ -80,3 +105,24 @@ class CumploProjectPage(ProjectPage):
         )
         self._browser.find_element_by_xpath(
             self._config['project']['simulator']['show']).click()
+
+
+class BriqProjectPage(ProjectPage):
+
+    def __init__(self, home):
+        ProjectPage.__init__(self, 'briq', home)
+
+    def _clean_payload(self, payload_):
+        payload_['minimum_invest'] = extract_number(
+            "quantity", payload_['minimum_invest'])
+        payload_['capital']['target'] = extract_number(
+            "quantity", payload_['capital']['target'])
+        payload_['capital']['current'] = extract_number(
+            "quantity", payload_['capital']['current'])
+
+        payload_['annual_rate'] = extract_number(
+            'percentage', payload_['annual_rate'])
+        payload_['commission'] = extract_number(
+            'percentage', payload_['commission'])
+        payload_['capital']['percentage'] = extract_number(
+            'percentage', payload_['capital']['percentage'])
