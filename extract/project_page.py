@@ -31,11 +31,16 @@ def extract_number(type_, text):
         "quantity": r'\$(?:\d+,?)+(?:\.\d+)?',
         "percentage": r'(?:\d+)+(?:\.\d+)?%'
     }
-    num = re.findall(regex[type_], text)[0]
-    num = num.replace('$', '')
-    num = num.replace(',', '')
-    num = num.replace('%', '')
-    return float(num)
+    num = re.findall(regex[type_], text)
+    if type(num) is list and len(num) >= 1:
+        num = num[0]
+        num = num.replace('$', '')
+        num = num.replace(',', '')
+        num = num.replace('%', '')
+        return float(num)
+    logging.error(
+        'The param does not contain a number: {}'.format(text))
+    return text
 
 
 class ProjectPage(object):
