@@ -71,3 +71,7 @@ investment_sites:
 driver:
   path: ./chromedriver
   implicitly_wait: 20
+aws:
+  credentials:
+    access_key: AKIAJ7DMZAUEDR5VYZZA
+    secret_key: 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
