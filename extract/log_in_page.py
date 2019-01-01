@@ -1,19 +1,18 @@
+import logging
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from extract.common import config
-from extract.common import browser
-from extract.common import credentials
+from extract.page_object_model import PageObjectModel
+
+flogging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
-class LogInPage(object):
+class LogInPage(PageObjectModel):
 
     def __init__(self, investment_site_uid):
-        self._config = config()['investment_sites'][investment_site_uid]
-        self._credentials = credentials()['investment_sites'][
-            investment_site_uid]
-        self._browser = browser()
+        PageObjectModel.__init__(self, investment_site_uid)
         self._home = "{}{}".format(
             self._config['url'], self._config['login']['url'])
 
@@ -42,12 +41,10 @@ class LogInPage(object):
 
     def navigate(self):
         self._browser.get(self._home)
-        self._browser.implicitly_wait(10)
         self._auth0()
         self.type_user_credential()
         self.type_password_credential()
         self.click_login()
-        self._browser.implicitly_wait(10)
         if 'until' in self._config['login']:
             WebDriverWait(self._browser, 10).until(
                 EC.text_to_be_present_in_element(
@@ -55,3 +52,5 @@ class LogInPage(object):
                     self._credentials['user']
                 )
             )
+
+        logging.info("logged in at {} correctly".format(self.site))

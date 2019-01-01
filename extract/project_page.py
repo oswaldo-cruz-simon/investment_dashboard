@@ -7,8 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-from extract.common import config
-from extract.common import browser
+from extract.page_object_model import PageObjectModel
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -43,12 +42,10 @@ def extract_number(type_, text):
     return text
 
 
-class ProjectPage(object):
+class ProjectPage(PageObjectModel):
 
     def __init__(self, investment_site_uid, home):
-        self._config = config()['investment_sites'][investment_site_uid]
-        self._browser = browser()
-        self._soup = None
+        PageObjectModel.__init__(self, investment_site_uid)
         self._home = "{}{}".format(self._config['url'], home)
 
     @property
@@ -61,8 +58,6 @@ class ProjectPage(object):
 
     def navigate(self):
         self._browser.get(self._home)
-        self._browser.implicitly_wait(
-            int(config()['driver']['implicitly_wait']))
 
     def _clean_payload(self, payload_):
         pass

@@ -4,16 +4,18 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import re
+import logging
 
-from extract.common import config
-from extract.common import browser
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+from extract.page_object_model import PageObjectModel
 
 
-class ProjectListPage(object):
+class ProjectListPage(PageObjectModel):
 
     def __init__(self, investment_site_uid):
-        self._config = config()['investment_sites'][investment_site_uid]
-        self._browser = browser()
+        PageObjectModel.__init__(self, investment_site_uid)
         self._soup = None
 
     @property
@@ -28,10 +30,8 @@ class ProjectListPage(object):
                     (By.XPATH, self._config['current_projetcs']['wait'])
                 )
             )
-        self._browser.implicitly_wait(50)
         html = self._browser.find_element_by_tag_name('html')
         html.send_keys(Keys.END)
-        self._browser.implicitly_wait(50)
         self._soup = BeautifulSoup(self._browser.page_source, 'html.parser')
 
 
@@ -48,6 +48,7 @@ class BriqProjectListPage(ProjectListPage):
                 for i in self._soup.find_all('img', {
                     'src': re.compile(r'label_buscando-inversion')
                 })]
+        logging.info("got {} current projects".format(len(urls)))
         return urls
 
 
@@ -64,5 +65,5 @@ class CumploProjectListPage(ProjectListPage):
             3:] for i in self._soup.find_all(text='ID')]
         project_urls = ['{}{}'.format('/solicitud/MX/', i)
                         for i in project_urls]
-
+        logging.info("got {} current projects".format(len(project_urls)))
         return project_urls
