@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from extract.page_object_model import PageObjectModel
 
-flogging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 

@@ -5,7 +5,7 @@ import calendar
 import random
 import time
 
-from extract.common import config
+from extract.common import credentials
 
 # ScrappingProducer('python-stream')
 
@@ -17,8 +17,8 @@ class ScrappingProducer(object):
         self._kinesis_client = boto3.client(
             'kinesis',
             region_name='us-west-2',
-            aws_access_key_id=config()['aws']['credentials']['access_key'],
-            aws_secret_access_key=config()['aws']['credentials']['secret_key'])
+            aws_access_key_id=credentials()['aws']['access_key'],
+            aws_secret_access_key=credentials()['aws']['secret_key'])
 
     def put_to_stream(self, thing_id, payload):
 
