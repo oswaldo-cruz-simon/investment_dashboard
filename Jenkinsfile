@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        HOME_MSG="Hola"
+        DOCKERFILE_NAME="DockerFile"
     }
     stages {
         stage("Check SCM files") {
@@ -9,9 +9,15 @@ pipeline {
                 script {
                     sh '''
                       echo "Checking SCM files"
-                      ls .
-                      DOCKER_FILE=$(ls. | grep DockerFile | grep -v grep)
+                      DOCKER_FILE=$(ls . | grep ${DOCKERFILE_NAME} | grep -v grep)
                       echo $DOCKER_FILE
+                      if [ -z "$DOCKER_FILE" ];
+                      then
+                        echo "Docker file is present on our checkout form SCM."
+                      else
+                        echo "Docker file is not present on our checkout form SCM. Aborting..."
+                        exit 1
+                      fi
                     '''
                 }
             }
