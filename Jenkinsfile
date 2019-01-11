@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script{
                     sh '''
-                      echo ${HOME_MSG}
+                      echo "Connecting to remote server........."
                     '''
                 }
             }
