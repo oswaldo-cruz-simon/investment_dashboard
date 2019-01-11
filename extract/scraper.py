@@ -16,7 +16,10 @@ class Scraper(object):
 
     def __init__(self, headless):
         options = Options()
-        options.headless = headless
+        #options.headless = headless
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         self._browser = webdriver.Chrome(config()['driver']['path'],
                 chrome_options=options)
         self._browser.implicitly_wait(10)

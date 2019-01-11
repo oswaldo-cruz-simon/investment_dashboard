@@ -13,25 +13,39 @@ using Anaconda
 ~~~
 conda create --name invdash python=3.6
 source activate invdash
+pip install -r requirements.txt
 ~~~
 or using virtualenv
 ~~~
-virtualenv -p /usr/bin/python3.6 environment
-source activate environment
+virtualenv -p /usr/bin/python3.6 env
+source activate env
+pip install -r requirements.txt
 ~~~
-### Download selenium driver
+### Download dependencies
+selenium driver
 ~~~
 wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip
 rm chromedriver_linux64.zip
 ~~~
-
 ### Configurate credentials
 1. copy and rename the file dotcredentials.yaml `cp dotcredentials.yaml .credentials.yaml`
 2. open the file .credentials.yaml
 3. replace users and passwords by valid ones for each site
 
+### Run
+Run scraper and send data to Kinesis.
+First activate the virtualenv
+~~~shell
+python extract/scraper.py cumplo -l
+python extract/scraper.py briq -l
+~~~
+Run kinesis consumer
+~~~shell
+python extract/kinesis_consumer.py
+~~~
 ### Deployment
 ~~~SHELL
 docker build -t scraper:v1 .
+docker run -it scraper:v1 bash
 ~~~
