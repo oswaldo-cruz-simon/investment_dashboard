@@ -8,14 +8,14 @@ pipeline {
             steps {
                 script {
                     sh '''
-                      echo "Checking SCM files"
+                      echo "Checking SCM files in workspace ..."
                       DOCKER_FILE=$(ls . | grep ${DOCKERFILE_NAME} | grep -v grep)
                       echo $DOCKER_FILE
                       if [ -n "$DOCKER_FILE" ];
                       then
-                        echo "Docker file is present on our checkout form SCM."
+                        echo "Docker file is present on our workspace from SCM checkout."
                       else
-                        echo "Docker file is not present on our checkout form SCM. Aborting..."
+                        echo "Docker file is present on our workspace from SCM checkout. Aborting."
                         exit 1
                       fi
                     '''
@@ -26,8 +26,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        echo "Here we run: docker build -t scraper:v1 if all files needed"
-                        docker build -t scraper:v1
+                        echo "Building scrapper Docker image ..."
+                        docker build -t scraper:v1 .
                     '''
                 }
             }
