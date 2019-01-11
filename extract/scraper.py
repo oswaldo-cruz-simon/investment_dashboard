@@ -1,17 +1,24 @@
 import json
-from extract.log_in_page import LogInPage
-from extract.factories import ProjectList
-from extract.factories import Project
-from extract.kinesis_producer import ScrappingProducer
+import sys
+import argparse
 
+from log_in_page import LogInPage
+from factories import ProjectList
+from factories import Project
+from kinesis_producer import ScrappingProducer
+from common import config
 from selenium import webdriver
-from extract.common import config
+from selenium.webdriver.chrome.options import Options
+
 
 
 class Scraper(object):
 
-    def __init__(self):
-        self._browser = webdriver.Chrome(config()['driver']['path'])
+    def __init__(self, headless):
+        options = Options()
+        options.headless = headless
+        self._browser = webdriver.Chrome(config()['driver']['path'],
+                chrome_options=options)
         self._browser.implicitly_wait(10)
 
     def scrape(self, site):
@@ -33,4 +40,27 @@ class Scraper(object):
             project_page.navigate()
             payload = project_page.payload
             put_response = producer.put_to_stream(
-                thing_id, json.dumps(payload))
+                thing_id, json.dumps(payload)['Data'])
+
+def parse_arrgs():
+    parser = argparse.ArgumentParser(
+        description="Scrape a site"
+    )
+
+    parser.add_argument("site", help="""
+        briq: Scrape briq.mx
+        briq: Scrape cumplo.mx
+        """, choices=["briq", "cumplo"])
+    parser.add_argument("-l", "--headless", help="""
+        Run selenium in headless mode
+        """, action="store_true")
+    args = parser.parse_args()
+    return args
+
+if __name__ == '__main__':
+    args = parse_arrgs()
+    site = args.site
+    headless = args.headless
+    print(site, headless)
+    scraper = Scraper(headless=headless)
+    scraper.scrape(site)

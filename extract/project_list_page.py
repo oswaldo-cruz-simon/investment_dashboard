@@ -6,10 +6,11 @@ from bs4 import BeautifulSoup
 import re
 import logging
 
+from page_object_model import PageObjectModel
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-from extract.page_object_model import PageObjectModel
 
 
 class ProjectListPage(PageObjectModel):

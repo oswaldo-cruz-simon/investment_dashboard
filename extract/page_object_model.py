@@ -1,5 +1,5 @@
-from extract.common import config
-from extract.common import credentials
+from common import config
+from common import credentials
 
 
 class PageObjectModel(object):

@@ -30,3 +30,8 @@ rm chromedriver_linux64.zip
 1. copy and rename the file dotcredentials.yaml `cp dotcredentials.yaml .credentials.yaml`
 2. open the file .credentials.yaml
 3. replace users and passwords by valid ones for each site
+
+### Deployment
+~~~SHELL
+docker build -t scraper:v1 .
+~~~

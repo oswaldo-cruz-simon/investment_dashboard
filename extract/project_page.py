@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-from extract.page_object_model import PageObjectModel
+from page_object_model import PageObjectModel
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -73,6 +73,7 @@ class ProjectPage(PageObjectModel):
         payload_ = map_nested_dicts(
             self._config['project']['payload'], get_text
         )
+        payload_['site'] = self.site
         self._clean_payload(payload_)
         return payload_
 
