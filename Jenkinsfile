@@ -27,6 +27,7 @@ pipeline {
                 script {
                     sh '''
                         echo "Here we run: docker build -t scraper:v1 if all files needed"
+                        docker build -t scraper:v1
                     '''
                 }
             }
