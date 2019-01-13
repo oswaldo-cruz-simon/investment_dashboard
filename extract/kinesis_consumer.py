@@ -43,8 +43,10 @@ class ProjectConsumer(object):
                 ShardIterator=record_response['NextShardIterator'],
                 Limit=2)
             if len(record_response['Records']) > 0:
-                print([i['Data'] for i in record_response['Records']])
-                # save_project.save(record_response['Records'])
+                records = [i['Data'] for i in record_response['Records']]
+                records = [json.loads(i) for i in records]
+                print([type(i) for i in records])
+                save_project.save([json.loads(i) for i in records])
             time.sleep(5)
 
 if __name__ == '__main__':

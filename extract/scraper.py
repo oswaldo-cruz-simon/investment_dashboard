@@ -11,17 +11,16 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
-
 class Scraper(object):
 
     def __init__(self, headless):
         options = Options()
-        #options.headless = headless
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
+        if headless:
+            options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
         self._browser = webdriver.Chrome(config()['driver']['path'],
-                chrome_options=options)
+                                         chrome_options=options)
         self._browser.implicitly_wait(10)
 
     def scrape(self, site):
@@ -42,8 +41,10 @@ class Scraper(object):
             project_page.home = url_project
             project_page.navigate()
             payload = project_page.payload
+            print(payload)
             put_response = producer.put_to_stream(
-                thing_id, json.dumps(payload)['Data'])
+                thing_id, json.dumps(payload))
+
 
 def parse_arrgs():
     parser = argparse.ArgumentParser(
