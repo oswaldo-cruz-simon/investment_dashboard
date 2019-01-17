@@ -28,7 +28,7 @@ pipeline {
                     echo "Downloading Chrome Driver into workspace ..."
                     sh '''
                         wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
-                        unzip chromedriver_linux64.zip
+                        unzip -o chromedriver_linux64.zip
                         rm chromedriver_linux64.zip
                     '''
                     DRIVER_IN_WS = sh (
