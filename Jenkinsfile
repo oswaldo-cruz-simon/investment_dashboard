@@ -29,7 +29,7 @@ pipeline {
                     def scrapperImage = docker.build("scraper:v1")
                     scrapperImage.inside {
                         sh '''
-                        ls 
+                         ls /app
                         '''
                     }
                 }

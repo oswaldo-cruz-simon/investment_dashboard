@@ -11,4 +11,4 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 
-ENTRYPOINT echo "Invesment analytic are running now!!"
+# ENTRYPOINT echo "Invesment analytic are running now!!"
