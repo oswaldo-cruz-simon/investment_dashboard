@@ -25,10 +25,22 @@ pipeline {
         stage("Build Docker Image") {
             steps {
                 script {
-                    sh '''
-                        echo "Building scrapper Docker image ..."
-                        docker build -t scraper:v1 .
-                    '''
+                    echo "Building scrapper Docker image ..."
+                    def scrapperImage = docker.build("scraper:v1")
+                    scrapperImage.inside {
+                        sh '''
+                        ls 
+                        '''
+                    }
+                }
+            }
+        }
+        stage("Run scrapper") {
+            steps {
+                script {
+                    echo "Running scrapper Docker image ..."
+                    def scrapperImage = docker.image("scraper:v1")
+                    scrapperImage.runAfter(10)
                 }
             }
         }
