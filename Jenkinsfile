@@ -86,7 +86,7 @@ pipeline {
                     echo "Running scrapper Docker image ..."
                     def scrapperImage = docker.image("scraper:v1")
                     scrapperImage.inside {
-                        sh -c echo \"Hola \""
+                        sh "echo \"Hola \""
                     }
                     scrapperImage.run()
 
