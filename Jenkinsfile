@@ -29,7 +29,7 @@ pipeline {
                     sh '''
                         wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
                         unzip -o chromedriver_linux64.zip
-                        rm chromedriver_linux64.zip
+                        rm chromedriver_linux64.zip*
                     '''
                     DRIVER_IN_WS = sh (
                         script: "ls | grep 'chromedriver'",
@@ -86,7 +86,13 @@ pipeline {
                     echo "Running scrapper Docker image ..."
                     def scrapperImage = docker.image("scraper:v1")
                     scrapperImage.inside {
-                        sh "echo \"Hola \""
+                        sh "echo Testing inside the container"
+                        sh """
+                        ls /app
+                        """
+                        sh """
+                        python --version
+                        """
                     }
                     scrapperImage.run()
 
