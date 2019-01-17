@@ -71,3 +71,8 @@ investment_sites:
 driver:
   path: ./chromedriver
   implicitly_wait: 20
+mongodb:
+  host: mflix-qfto6.mongodb.net
+  db:
+    name: investment
+    collname: project
