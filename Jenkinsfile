@@ -22,11 +22,56 @@ pipeline {
                 }
             }
         }
+        stage("Prepare external packages for container") {
+            steps {
+                script {
+                    echo "Downloading Chrome Driver into workspace ..."
+                    sh '''
+                        wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
+                        unzip chromedriver_linux64.zip
+                        rm chromedriver_linux64.zip
+                    '''
+                    DRIVER_IN_WS = sh (
+                        script: "ls | grep 'chromedriver'",
+                        returnStdout: true
+                    ).trim()
+                    if ( DRIVER_IN_WS == "chromedriver") {
+                        echo "Chrome Driver was downloaded into workspace."
+                    } else{
+                        echo("Chrome Driver was not downloaded into workspace. We could nor create docker image.")
+                        currentBuild.result = 'ABORTED'
+                    }
+                }
+            }
+        }
+        stage("Prepare external configuration for container") {
+            steps {
+                script {
+                    echo "Downloading Chrome Driver into workspace ..."
+                    sh '''
+                        wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
+                        unzip chromedriver_linux64.zip
+                        rm chromedriver_linux64.zip
+                    '''
+                    DRIVER_IN_WS = sh (
+                        script: "ls | grep 'chromedriver'",
+                        returnStdout: true
+                    ).trim()
+                    if ( DRIVER_IN_WS == "chromedriver") {
+                        echo "Chrome Driver was downloaded into workspace."
+                    } else{
+                        echo("Chrome Driver was not downloaded into workspace. We could nor create docker image.")
+                        currentBuild.result = 'ABORTED'
+                    }
+                }
+            }
+        }
         stage("Build Docker Image") {
             steps {
                 script {
                     echo "Building scrapper Docker image ..."
                     def scrapperImage = docker.build("scraper:v1")
+                    scrapperImage.copy(file:"sourceFile", tofile:"targetFile")
                     scrapperImage.inside {
                         sh '''
                          ls /app
@@ -40,7 +85,7 @@ pipeline {
                 script {
                     echo "Running scrapper Docker image ..."
                     def scrapperImage = docker.image("scraper:v1")
-                    scrapperImage.runAfter(10)
+                    scrapperImage.run("sh -c echo \"Hola \"")
                 }
             }
         }
