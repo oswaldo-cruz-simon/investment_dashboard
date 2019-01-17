@@ -51,7 +51,9 @@ pipeline {
             steps {
                 script {
                     echo "Copy trusted into workspace ..."
-                    cp -f "$CONFIG_WORKSPACE.credentials.yaml" ".credentials.yaml"
+                    sh '''
+                        cp -f $CONFIG_WORKSPACE.credentials.yaml  .credentials.yaml
+                    '''
                     CONFIG_IN_WS = sh (
                         script: "ls .credentials.yaml",
                         returnStdout: true
