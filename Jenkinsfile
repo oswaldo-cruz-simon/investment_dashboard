@@ -52,7 +52,7 @@ pipeline {
                 script {
                     echo "Copy trusted into workspace ..."
                     sh '''
-                        cp -f $CONFIG_WORKSPACE.credentials.yaml  .credentials.yaml
+                        cp -f $CONFIG_WORKSPACE.credentials.yaml  ./.credentials.yaml
                     '''
                     CONFIG_IN_WS = sh (
                         script: "ls .credentials.yaml",
@@ -85,7 +85,11 @@ pipeline {
                 script {
                     echo "Running scrapper Docker image ..."
                     def scrapperImage = docker.image("scraper:v1")
-                    scrapperImage.run("sh -c echo \"Hola \"")
+                    scrapperImage.inside {
+                        sh -c echo \"Hola \""
+                    }
+                    scrapperImage.run()
+
                 }
             }
         }
