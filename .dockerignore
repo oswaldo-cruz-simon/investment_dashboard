@@ -1,0 +1,12 @@
+# git files
+.git
+.gitignore
+# jupyter files
+.ipynb_checkpoints
+*.ipynb
+# Others
+Dockerfile
+README.md
+dotcredentials.yaml
+env
+Jenkinsfile

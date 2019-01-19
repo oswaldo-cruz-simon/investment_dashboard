@@ -47,5 +47,6 @@ python extract/kinesis_consumer.py
 ### Deployment
 ~~~SHELL
 docker build -t scraper:v1 .
-docker run -it scraper:v1 bash
+docker run scraper:v1 briq -l
+docker run scraper:v1 cumplo -l
 ~~~

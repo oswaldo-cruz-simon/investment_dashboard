@@ -11,4 +11,4 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 
-CMD echo "Invesment analytic are running now!!"
+ENTRYPOINT ["python", "extract/scraper.py"]
