@@ -3,3 +3,4 @@ chromedriver
 env/
 .ipynb_checkpoints/
 *__pycache__/
+.idea/

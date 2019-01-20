@@ -1,7 +1,7 @@
-from project_list_page import CumploProjectListPage
-from project_list_page import BriqProjectListPage
-from project_page import CumploProjectPage
-from project_page import BriqProjectPage
+from extract.project_list_page import CumploProjectListPage
+from extract.project_list_page import BriqProjectListPage
+from extract.project_page import CumploProjectPage
+from extract.project_page import BriqProjectPage
 
 
 class ProjectList(object):

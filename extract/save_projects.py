@@ -1,7 +1,7 @@
 import pymongo
 
-from common import credentials
-from common import config
+from extract.common import credentials
+from extract.common import config
 
 
 host = config()['mongodb']['host']

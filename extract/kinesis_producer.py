@@ -5,7 +5,7 @@ import calendar
 import random
 import time
 
-from common import credentials
+from extract.common import credentials
 
 # ScrappingProducer('python-stream')
 

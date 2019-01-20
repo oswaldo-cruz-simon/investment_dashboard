@@ -3,8 +3,8 @@ import json
 from datetime import datetime
 import time
 
-from common import credentials
-from save_projects import SaveProjects
+from extract.common import credentials
+from extract.save_projects import SaveProjects
 
 
 class ProjectConsumer(object):

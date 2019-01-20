@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-from page_object_model import PageObjectModel
+from extract.page_object_model import PageObjectModel
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

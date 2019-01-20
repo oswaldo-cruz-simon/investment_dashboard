@@ -2,11 +2,11 @@ import json
 import sys
 import argparse
 
-from log_in_page import LogInPage
-from factories import ProjectList
-from factories import Project
-from kinesis_producer import ScrappingProducer
-from common import config
+from extract.log_in_page import LogInPage
+from extract.factories import ProjectList
+from extract.factories import Project
+from extract.kinesis_producer import ScrappingProducer
+from extract.common import config
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
