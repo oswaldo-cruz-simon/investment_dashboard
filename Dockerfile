@@ -11,4 +11,4 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python", "extract/scraper.py"]
+ENTRYPOINT ["python", "scraper.py"]
