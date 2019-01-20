@@ -47,6 +47,7 @@ class ProjectPage(PageObjectModel):
     def __init__(self, investment_site_uid, home):
         PageObjectModel.__init__(self, investment_site_uid)
         self._home = "{}{}".format(self._config['url'], home)
+        self._id = home.split('/')[-1]
 
     @property
     def home(self):
@@ -55,6 +56,7 @@ class ProjectPage(PageObjectModel):
     @home.setter
     def home(self, home):
         self._home = "{}{}".format(self._config['url'], home)
+        self._id = home.split('/')[-1]
 
     def navigate(self):
         self._browser.get(self._home)
@@ -74,6 +76,7 @@ class ProjectPage(PageObjectModel):
             self._config['project']['payload'], get_text
         )
         payload_['site'] = self.site
+        payload_['_id'] = self._id
         self._clean_payload(payload_)
         return payload_
 
