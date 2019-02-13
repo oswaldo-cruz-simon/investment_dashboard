@@ -12,19 +12,20 @@ from pulp import *
 
 class DiversificationBuilder(object):
 
-    def __init__(self, name):
-        self.prob = LpProblem("Investment problem", LpMaximize)
+    def __init__(self, name, capital):
+        self.prob = LpProblem(name, LpMaximize)
         self.x = []
         self.vars = None
         self.coeff = None
+        self.capital = capital
 
     def add_variable(self, name):
         self.x.append(name)
         self.x.append("mul_{}".format(name))
 
     def save_variables(self):
-        self.vars = LpVariable.dicts("vars", self.x, 0)
-        self.coeff = np.zeros((1, len(self.x)))
+        self.vars = LpVariable.dicts("vars", self.x, 0, cat=LpInteger)
+        #self.coeff = np.zeros((1, len(self.x)))
 
     def add_products(self, products):
         objetive = []
@@ -35,5 +36,30 @@ class DiversificationBuilder(object):
             capital += [1, 0]
 
         self.save_variables()
-        self.coeff = np.vstack([self.coeff, objetive])
-        self.coeff = np.vstack([self.coeff, capital])
+        #self.coeff = np.array(objetive)
+        #self.coeff = np.vstack([self.coeff, capital])
+        self.coeff = np.array(capital)
+
+        for v, c in zip(self.vars, objetive):
+            print(v, c)
+        self.prob += lpSum([self.vars[v] * c for v, c in zip(self.x, objetive)]), "maximize"
+
+        for p in products:
+            constraint = self.get_multiple_constraint(p)
+            self.coeff = np.vstack([self.coeff, constraint])
+        # for i, coefficient in enumerate(self.coeff):
+        #     if i == 0:
+        #         self.prob += lpSum([self.vars[v] * float(c) for v, c in zip(self.x, coefficient)]) == 0, "constraint {}".format(i)
+        #     else:
+        #         self.prob += lpSum([self.vars[v] * int(c) for v, c in zip(self.x, coefficient)]) == 0, "constraint {}".format(i)
+
+        self.prob += lpSum([self.vars[v] * float(c) for v, c in zip(self.x, self.coeff[0])]) <= self.capital, "capital"
+        self.prob += lpSum([self.vars[v] * float(c) for v, c in zip(self.x, self.coeff[1])]) == 0, "multiple 1"
+        self.prob += lpSum([self.vars[v] * float(c) for v, c in zip(self.x, self.coeff[2])]) == 0, "multiple 2"
+
+    def get_multiple_constraint(self, product):
+        constraint = np.zeros(len(self.x))
+        var_index = self.x.index(product['name'])
+        constraint[var_index] = 1
+        constraint[var_index + 1] = -product['increment']
+        return constraint
