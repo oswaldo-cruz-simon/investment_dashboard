@@ -6,29 +6,30 @@ supported Platforms:
 * m2crowd
 * inverspot
 
-## Installation
+## Getting Started
 
-### Create virtual environment
-using Anaconda
-~~~
-conda create --name invdash python=3.6
-source activate invdash
-pip install -r requirements.txt
-~~~
-or using virtualenv
-~~~
-virtualenv -p /usr/bin/python3.6 env
-source activate env
-pip install -r requirements.txt
-~~~
-### Download dependencies
-selenium driver
+### Prerequisites
+Selenium Driver
 ~~~
 wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip
 rm chromedriver_linux64.zip
 ~~~
-### Configurate credentials
+### Installing
+Using Anaconda
+~~~
+conda create --name invdash python=3.6
+source activate invdash
+pip install -r requirements.txt
+~~~
+Or using virtualenv
+~~~
+virtualenv -p /usr/bin/python3.6 env
+source activate env
+pip install -r requirements.txt
+~~~
+
+Configure credentials
 1. copy and rename the file dotcredentials.yaml `cp dotcredentials.yaml .credentials.yaml`
 2. open the file .credentials.yaml
 3. replace users and passwords by valid ones for each site
@@ -40,7 +41,7 @@ First activate the virtualenv
 python extract/scraper.py cumplo -l
 python extract/scraper.py briq -l
 ~~~
-Run kinesis consumer
+Run Kinesis consumer
 ~~~shell
 python extract/kinesis_consumer.py
 ~~~
@@ -50,3 +51,8 @@ docker build -t scraper:v1 .
 docker run scraper:v1 briq -l
 docker run scraper:v1 cumplo -l
 ~~~
+
+## Authors
+
+* **[Oswaldo Cruz Simon](https://github.com/OswaldoCuzSimon)**
+* **[Isaac Fonseca](https://github.com/next-javierisaacfonseca)** 

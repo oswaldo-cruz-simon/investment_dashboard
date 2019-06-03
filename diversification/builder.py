@@ -18,6 +18,7 @@ class DiversificationBuilder(object):
         self.vars = None
         self.coeff = None
         self.capital = capital
+        self.left_values = []
 
     def add_variable(self, name):
         self.x.append(name)
@@ -63,3 +64,24 @@ class DiversificationBuilder(object):
         constraint[var_index] = 1
         constraint[var_index + 1] = -product['increment']
         return constraint
+
+    def add_constraint(self, coefficients, operator, left_value, name):
+        self.coeff = np.vstack([self.coeff, coefficients])
+        self.left_values.append({
+            "op": operator,
+            "left": left_value,
+            "name": name
+        })
+
+    def apply_constraints(self,):
+        for i, c in enumerate(self.coeff):
+            if self.left_values[i]['op'] == '==':
+                self.prob += lpSum(
+                    [self.vars[v] * float(c) for v, c in zip(self.x, c)]) == self.left_values[i]['left'],\
+                             self.left_values[i]['name']
+            elif self.left_values[i]['op'] == '<=':
+                self.prob += lpSum(
+                    [self.vars[v] * float(c) for v, c in zip(self.x, c)]) <= self.left_values[i]['left'],\
+                             self.left_values[i]['name']
+
+
